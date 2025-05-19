@@ -3,21 +3,21 @@ package io.buffered;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import static io.buffered.BufferedConst.BUFFER_SIZE;
 import static io.buffered.BufferedConst.FILE_NAME;
 
-public class ReadFileV1 {
+public class ReadFileV2 {
 
     public static void main(String[] args) throws IOException {
         FileInputStream fis = new FileInputStream(BufferedConst.FILE_NAME);
 
         long startTime = System.currentTimeMillis();
 
-
+        byte[] buffer = new byte[BUFFER_SIZE];
         int fileSize = 0;
-        int data;
-
-        while ((data = fis.read()) != -1) {
-            fileSize++;
+        int size;
+        while ((size = fis.read(buffer)) != -1) {
+            fileSize += size;
         }
         fis.close();
 
