@@ -1,14 +1,12 @@
 package io.text;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import static io.text.TextConst.*;
-import static java.nio.charset.StandardCharsets.*;
+import static io.text.TextConst.FILE_NAME;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ReaderWriterMainV1 {
 
