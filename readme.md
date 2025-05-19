@@ -2,6 +2,7 @@
 
 - [섹션 2. 문자 인코딩](#섹션-2-문자-인코딩)
 - [섹션 3. I/O 기본1](#섹션-3-io-기본1)
+- [섹션 4. I/O 기본2](#섹션-4-io-기본2)
 
 
 > 해당 내용은 [자바 실전 자바 고급 2편 - 김영한](https://www.inflearn.com/course/%EA%B9%80%EC%98%81%ED%95%9C%EC%9D%98-%EC%8B%A4%EC%A0%84-%EC%9E%90%EB%B0%94-%EA%B3%A0%EA%B8%89-2/dashboard) 강의를 듣고 정리했습니다.
@@ -191,4 +192,64 @@ InputStream과 OutputStream은 다양한 스트림 구현체들의 공통 기능
 
 ---
 
+## 섹션 4. I/O 기본2
 
+### 문자 다루기1 - 시작
+
+* 스트림의 모든 데이터는 byte 단위임
+* byte가 아닌 문자를 스트림에 직접 전달할 수 없음 → 문자를 다루려면 별도 변환 필요함
+
+---
+
+### 문자 다루기2 - 스트림을 문자로
+
+* `OutputStreamWriter`: 문자를 받아 지정된 문자셋으로 인코딩하여 byte\[]로 변환 후 출력함
+* `InputStreamReader`: byte를 받아 문자(char)로 디코딩함
+
+  * 반환 타입은 `int`인데 실제 문자로 쓰기 위해 `char`로 캐스팅해서 사용함
+
+---
+
+### 문자 다루기3 - Reader, Writer
+
+자바는 **byte용 스트림**, **문자용 스트림**을 구분해서 제공함
+
+| 구분       | 클래스 계층                        | 예시                                                                |
+| -------- | ----------------------------- | ----------------------------------------------------------------- |
+| byte 스트림 | `InputStream`, `OutputStream` | `FileInputStream`, `BufferedOutputStream`, `ByteArrayInputStream` |
+| 문자 스트림   | `Reader`, `Writer`            | `FileWriter`, `BufferedReader`, `OutputStreamWriter`              |
+
+* `OutputStreamWriter`는 `Writer`의 자식 클래스임
+
+  * `write(String)` 가능함
+  * 내부적으로 문자를 byte로 변환한 후 `OutputStream` 계열로 전달함
+* 모든 데이터는 최종적으로 byte로 저장됨
+
+  * `write(String)` 내부에서도 문자 인코딩 처리 후 byte로 변환되어 저장됨
+
+**정리**
+
+* 문자 다루기에는 `Reader`, `Writer` 계열이 편함
+* 하지만 내부적으로는 결국 byte로 변환됨
+
+---
+
+### 문자 다루기4 - BufferedReader
+
+* `BufferedReader`는 문자 데이터를 **한 줄 단위로 읽을 수 있음** (`readLine()` 지원)
+
+---
+
+### 기타 스트림
+
+#### PrintStream
+
+* `System.out`에 사용되는 출력 스트림
+* `PrintStream` + `FileOutputStream`을 조합하면 **콘솔 출력처럼 파일 출력 가능함**
+
+#### DataOutputStream
+
+* `int`, `double`, `boolean`, `String` 같은 **기본형 타입을 편리하게 출력 가능**
+* 바이너리 형식으로 저장함 → 읽을 땐 `DataInputStream` 필요함
+
+---
