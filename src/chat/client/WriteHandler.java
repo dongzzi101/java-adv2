@@ -31,7 +31,6 @@ public class WriteHandler implements Runnable {
 
             while (true) {
                 String toSend = scanner.nextLine();
-
                 if (toSend.isEmpty()) {
                     continue;
                 }
@@ -41,7 +40,7 @@ public class WriteHandler implements Runnable {
                     break;
                 }
 
-                if (toSend.equals("/")) {
+                if (toSend.startsWith("/")) {
                     output.writeUTF(toSend);
                 } else {
                     output.writeUTF("/message" + DELIMITER + toSend);

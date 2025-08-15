@@ -36,7 +36,7 @@ public class SessionManager {
         }
     }
 
-    public synchronized List<String> getUsername() {
+    public synchronized List<String> getAllUsername() {
         List<String> usernames = new ArrayList<>();
         for (Session session : sessions) {
             if (session.getUsername() != null) {
